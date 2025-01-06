@@ -1,0 +1,83 @@
+# Python bytecode
+*.py[cod]
+__pycache__/
+*.so
+*.pyo
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+*.sqlite3-journal
+
+# Secret files
+.env
+*.key
+secrets.json
+
+# Virtual environments
+venv/
+env/
+*.venv
+ENV/
+build/
+develop-eggs/
+.eggs/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Static files
+/static/
+staticfiles/
+static/
+media/
+mediafiles/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# Celery and Redis
+celerybeat-schedule
+*.pid
+
+# Migrations
+*.pyc
+migrations/*
+
+# Coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# MyPy and Pyright
+.mypy_cache/
+.pytest_cache/
+.pyright/

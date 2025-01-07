@@ -1,0 +1,92 @@
+[
+    {
+        "model": "railway.station",
+        "pk": 1,
+        "fields": {
+            "name": "New Delhi",
+            "code": "NDLS",
+            "city": "New Delhi"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 2,
+        "fields": {
+            "name": "Mumbai Central",
+            "code": "MMCT",
+            "city": "Mumbai"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 3,
+        "fields": {
+            "name": "Chennai Central",
+            "code": "MAS",
+            "city": "Chennai"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 4,
+        "fields": {
+            "name": "Howrah Junction",
+            "code": "HWH",
+            "city": "Kolkata"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 5,
+        "fields": {
+            "name": "Bangalore City",
+            "code": "SBC",
+            "city": "Bangalore"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 6,
+        "fields": {
+            "name": "Secunderabad Junction",
+            "code": "SC",
+            "city": "Hyderabad"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 7,
+        "fields": {
+            "name": "Ahmedabad Junction",
+            "code": "ADI",
+            "city": "Ahmedabad"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 8,
+        "fields": {
+            "name": "Pune Junction",
+            "code": "PUNE",
+            "city": "Pune"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 9,
+        "fields": {
+            "name": "Lucknow Charbagh",
+            "code": "LKO",
+            "city": "Lucknow"
+        }
+    },
+    {
+        "model": "railway.station",
+        "pk": 10,
+        "fields": {
+            "name": "Patna Junction",
+            "code": "PNBE",
+            "city": "Patna"
+        }
+    }
+]

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # LOAL APPS
     "users",
+    "dashboard",
+    "railway",
     # THIRD PARTY APPS
     "allauth",
     "allauth.account",

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search Trains
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Search Trains</h2>
+    <form method="GET" action="#">
+        <div class="mb-3">
+            <label for="source" class="form-label">Source</label>
+            <input type="text" class="form-control" name="source" id="source" placeholder="Enter Source" required>
+        </div>
+        <div class="mb-3">
+            <label for="destination" class="form-label">Destination</label>
+            <input type="text" class="form-control" name="destination" id="destination" placeholder="Enter Destination" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+{% endblock %}

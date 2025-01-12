@@ -6,100 +6,104 @@
 
 {% block content %}
 <div class="container py-4">
-    <h2>Add Train</h2>
-    <form method="POST" action="{%url 'add_train'%}"> 
+    <h2 class="mb-4">Add Train</h2>
+    <form method="POST" action="{% url 'add_train' %}" class="needs-validation" novalidate>
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="route_name" class="form-label">Train Name</label>
-            <input type="text" class="form-control" name="route_name" id="route_name" placeholder="Enter Train Name" required>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="route_name" class="form-label">Train Name</label>
+                <input type="text" class="form-control" name="route_name" id="route_name" placeholder="Enter Train Name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="route_number" class="form-label">Train Number</label>
+                <input type="text" class="form-control" name="route_number" id="route_number" placeholder="Enter Train Number" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="route_source" class="form-label">Start Station</label>
+                <select class="form-select" name="route_source" id="route_source" required>
+                    <option value="" disabled selected>Select Start Station</option>
+                    {% for station in stations %}
+                        <option value="{{ station.code }}">{{ station.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="route_destination" class="form-label">End Station</label>
+                <select class="form-select" name="route_destination" id="route_destination" required>
+                    <option value="" disabled selected>Select End Station</option>
+                    {% for station in stations %}
+                        <option value="{{ station.code }}">{{ station.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="route_departure_time" class="form-label">Departure Time</label>
+                <input type="time" class="form-control" name="route_departure_time" id="route_departure_time" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="route_arrival_time" class="form-label">Arrival Time</label>
+                <input type="time" class="form-control" name="route_arrival_time" id="route_arrival_time" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="route_duration" class="form-label">Duration (minutes)</label>
+                <input type="number" class="form-control" name="route_duration" id="route_duration" placeholder="Enter Duration" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="route_base_fare" class="form-label">Base Fare (₹)</label>
+                <input type="number" class="form-control" name="route_base_fare" id="route_base_fare" placeholder="Enter Base Fare" required step="0.01">
+            </div>
         </div>
         <div class="mb-3">
-            <label for="route_number" class="form-label">Train Number</label>
-            <input type="text" class="form-control" name="route_number" id="route_number" placeholder="Enter Train Number" required>
-        </div>
-        {% comment %} <div class="mb-3">
-            <label for="route_source" class="form-label">Start Station</label>
-            <input type="text" class="form-control" name="route_source" id="route_source" placeholder="Enter Start Station" required>
-        </div> {% endcomment %}
-        <div class="mb-3">
-            <label for="route_source" class="form-label">Start Station</label>
-            <select class="form-control" name="route_source" id="route_source" required>
-                <option value="" disabled selected>Select Start Station</option>
-                {% for station in stations %}
-                    <option value="{{ station.code }}">{{ station.name }}</option>
+            <label for="route_running_days" class="form-label">Running Days</label>
+            <select class="form-select" name="route_running_days" id="route_running_days" multiple required>
+                {% for day in days %}
+                    <option value="{{ day.code }}">{{ day.name }}</option>
                 {% endfor %}
             </select>
-        </div>
-        {% comment %} <div class="mb-3">
-            <label for="route_destination" class="form-label">End Station</label>
-            <input type="text" class="form-control" name="route_destination" id="route_destination" placeholder="Enter End Station" required>
-        </div> {% endcomment %}
-        <div class="mb-3">
-            <label for="route_destination" class="form-label">End Station</label>
-            <select class="form-control" name="route_destination" id="route_destination" required>
-                <option value="" disabled selected>Select End Station</option>
-                {% for station in stations %}
-                    <option value="{{ station.code }}">{{ station.name }}</option>
-                {% endfor %}
-            </select>
-        </div>    
-        <div class="mb-3">
-            <label for="route_base_fare" class="form-label">Base Fare</label>
-            <input type="number" class="form-control" name="route_base_fare" id="route_base_fare" placeholder="Enter Base Fare" required step="0.01">
-        </div>
-        <div class="mb-3">
-            <label for="route_departure_time" class="form-label">Departure Time</label>
-            <input type="time" class="form-control" name="route_departure_time" id="route_departure_time" required>
-        </div>
-        <div class="mb-3">
-            <label for="route_arrival_time" class="form-label">Arrival Time</label>
-            <input type="time" class="form-control" name="route_arrival_time" id="route_arrival_time" required>
-        </div>
-        <div class="mb-3">
-            <label for="route_duration" class="form-label">Duration</label>
-            <input type="number" class="form-control" name="route_duration" id="route_duration" placeholder="Enter Duration" required>
         </div>
         <button type="submit" class="btn btn-primary" name="add_train">Add Train</button>
     </form>
 
-    <hr class="my-4">
+    <hr class="my-5">
 
-    <h2>Add Halts</h2>
-    <form method="POST" action="{%url 'add_train'%}">
+    <h2 class="mb-4">Add Halts</h2>
+    <form method="POST" action="{% url 'add_train' %}" class="needs-validation" novalidate>
         {% csrf_token %}
-        {% comment %} <div class="mb-3">
-            <label for="halt_on_route" class="form-label">Route Number</label>
-            <input type="text" class="form-control" name="halt_on_route" id="halt_on_route" placeholder="Enter Route Number" required>
-        </div> {% endcomment %}
-        <div class="mb-3">
-            <label for="halt_on_route" class="form-label">Route Number</label>
-            <select class="form-control" name="halt_on_route" id="halt_on_route" required>
-                <option value="" disabled selected>Select Route</option>
-                {% for route in routes %}
-                    <option value="{{ route.number }}">{{ route.name }} ({{ route.number }})</option>
-                {% endfor %}
-            </select>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="halt_on_route" class="form-label">Route Number</label>
+                <select class="form-select" name="halt_on_route" id="halt_on_route" required>
+                    <option value="" disabled selected>Select Route</option>
+                    {% for route in routes %}
+                        <option value="{{ route.number }}">{{ route.name }} ({{ route.number }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="halt_station" class="form-label">Station Name</label>
+                <select class="form-select" name="halt_station" id="halt_station" required>
+                    <option value="" disabled selected>Select Station</option>
+                    {% for station in stations %}
+                        <option value="{{ station.code }}">{{ station.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-        {% comment %} <div class="mb-3">
-            <label for="halt_station" class="form-label">Station Name</label>
-            <input type="text" class="form-control" name="halt_station" id="halt_station" placeholder="Enter Station Name" required>
-        </div> {% endcomment %}
-        <div class="mb-3">
-            <label for="halt_station" class="form-label">Station Name</label>
-            <select class="form-control" name="halt_station" id="halt_station" required>
-                <option value="" disabled selected>Select Station</option>
-                {% for station in stations %}
-                    <option value="{{ station.code }}">{{ station.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="halt_arrival_time" class="form-label">Arrival Time</label>
-            <input type="time" class="form-control" name="halt_arrival_time" id="halt_arrival_time" required>
-        </div>
-        <div class="mb-3">
-            <label for="halt_departure_time" class="form-label">Departure Time</label>
-            <input type="time" class="form-control" name="halt_departure_time" id="halt_departure_time" required>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="halt_arrival_time" class="form-label">Arrival Time</label>
+                <input type="time" class="form-control" name="halt_arrival_time" id="halt_arrival_time" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="halt_departure_time" class="form-label">Departure Time</label>
+                <input type="time" class="form-control" name="halt_departure_time" id="halt_departure_time" required>
+            </div>
         </div>
         <div class="mb-3">
             <label for="halt_order" class="form-label">Halt Order</label>

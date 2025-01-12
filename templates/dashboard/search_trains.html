@@ -7,16 +7,112 @@
 {% block content %}
 <div class="container py-4">
     <h2>Search Trains</h2>
-    <form method="GET" action="#">
+    <form method="POST" action="{% url 'search_trains' %}">
+        {% csrf_token %}
+        
         <div class="mb-3">
             <label for="source" class="form-label">Source</label>
-            <input type="text" class="form-control" name="source" id="source" placeholder="Enter Source" required>
+            <select class="form-control" name="source" id="source">
+                <option value="" {% if not selected_source %}selected{% endif %}>-- Clear Selection --</option>
+                {% for station in stations %}
+                <option value="{{ station.id }}" {% if selected_source and station.id == selected_source.id %}selected{% endif %}>
+                    {{ station.name }} ({{ station.code }})
+                </option>
+                {% endfor %}
+            </select>
         </div>
+        
         <div class="mb-3">
             <label for="destination" class="form-label">Destination</label>
-            <input type="text" class="form-control" name="destination" id="destination" placeholder="Enter Destination" required>
+            <select class="form-control" name="destination" id="destination">
+                <option value="" {% if not selected_destination %}selected{% endif %}>-- Clear Selection --</option>
+                {% for station in stations %}
+                <option value="{{ station.id }}" {% if selected_destination and station.id == selected_destination.id %}selected{% endif %}>
+                    {{ station.name }} ({{ station.code }})
+                </option>
+                {% endfor %}
+            </select>
         </div>
+        
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
+</div>
+<div>
+    <h3 class="text-center">Available Trains</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Train Name</th>
+                <th>Train Number</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Duration</th>
+                <th>Base Fare</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route in routes %}
+            <tr>
+                <td>{{ route.name }}</td>
+                <td>{{ route.number }}</td>
+                <td>{{ route.source }}</td>
+                <td>{{ route.destination }}</td>
+                <td>{{ route.departure_time }}</td>
+                <td>{{ route.arrival_time }}</td>
+                <td>{{ route.duration }}</td>
+                <td>{{ route.base_fare }}</td>
+                <td rowspan="3" class="text-center align-middle">
+                    <a href="#" class="btn btn-success">Buy Ticket</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <strong>Halt Stations:</strong>
+                    <ul>
+                        {% for halt in route.halts.all %}
+                        <li>{{ halt.station.name }} - ({{ halt.station.code }})({{ halt.arrival_time }} - {{ halt.departure_time }})</li>
+                        {% endfor %}
+                    </ul>
+                </td>   
+                <td colspan="4">
+                    <strong>Halt Stations:</strong>
+                    <ul>
+                        {% for halt in route.halts.all %}
+                        <li>{{ halt.station.name }} - ({{ halt.station.code }})({{ halt.arrival_time }} - {{ halt.departure_time }})</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <strong> Running Days:</strong>
+                    <ul>
+                        {% for day in route.running_days.all %}
+                        <li>{{ day }}</li>
+                        {% endfor %}
+                </td>
+                <td colspan="4">
+                    <strong> Running Days:</strong>
+                    <ul>
+                        {% for day in route.running_days.all %}
+                        <li>{{ day }}</li>
+                        {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                
+            </tr>
+            
+            
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">No trains available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

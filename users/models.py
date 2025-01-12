@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_passenger = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
-    REQUIRED_FIELDS = ["email", "user_type"]
+    REQUIRED_FIELDS = ["email"]
 
     def __str__(self):
         return self.username

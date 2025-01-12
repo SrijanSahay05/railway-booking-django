@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+Available Trains
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4 text-center">Available Routes</h3>
+    <ul class="list-group">
+        {% for route in routes %}
+        <li class="list-group-item mb-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <strong>Route Name:</strong> {{ route.name }} 
+                    <span class="float-end"><strong>Route Number:</strong> {{ route.number }}</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>Source:</strong> {{ route.source }}</p>
+                    <p><strong>Destination:</strong> {{ route.destination }}</p>
+                    <p><strong>Departure Time:</strong> {{ route.departure_time }}</p>
+                    <p><strong>Arrival Time:</strong> {{ route.arrival_time }}</p>
+                    <p><strong>Duration:</strong> {{ route.duration }} hours</p>
+                    <p><strong>Base Fare:</strong> ₹{{ route.base_fare }}</p>
+                </div>
+                <div class="card-footer">
+                    <strong>Halt Stations:</strong>
+                    <ul class="list-group">
+                        {% for halt in halt_stations %}
+                            {% if halt.route.id == route.id %}
+                            <li class="list-group-item">
+                                <strong>Station Name:</strong> {{ halt.station.name }} ({{halt.station.code}}) <br>
+                                <strong>Arrival Time:</strong> {{ halt.arrival_time }} <br>
+                                <strong>Departure Time:</strong> {{ halt.departure_time }} <br>
+                                <strong>Halt Order:</strong> {{ halt.order }}
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </li>
+        {% empty %}
+        <p class="text-muted text-center">No routes available.</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
